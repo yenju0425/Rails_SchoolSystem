@@ -1,15 +1,15 @@
 # Problem
 
-## Description
+You are planning an online admissions system, it will  allow teachers to follow student to see this student's latest activities. 
 
-OpenApply is an admissions system. Assuming there is a feature: a teacher can subscribe to a student's latest activities by following that student, please provide the following APIs to implement the feature:
+please provide the following APIs to implement the feature:
 
-- Follow a student.
-- Unfollow a student.
-- List the followed students.
+- Teacher can follow a student.
+- Teacher can unfollow a student.
+- List teacher's followed students.
+
 
 ## Requirements
 
-- Code is based on this repository.
 - Response is rendered in JSON format.
 - Unit testing your APIs.
