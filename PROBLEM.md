@@ -2,11 +2,15 @@
 
 You are planning an online admissions system, it will  allow teachers to follow student to see this student's latest activities. 
 
-please provide the following APIs to implement the feature:
+please provide the following 3 APIs to implement the feature:
 
-- Teacher can follow a student.
-- Teacher can unfollow a student.
-- List teacher's followed students.
+1. Teacher can follow a student.
+2. Teacher can unfollow a student.
+3. Can list specify teacher's followed students.
+
+### Note:
+
+You can define model attributes freely, all we want is the follow/unfollow, if you can make it more like real world feature that's welcome.
 
 
 ## Requirements
