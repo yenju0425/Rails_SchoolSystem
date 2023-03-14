@@ -6,7 +6,7 @@ please provide the following 3 APIs to implement the feature:
 
 1. Teacher can follow a student.
 2. Teacher can unfollow a student.
-3. Can list specify teacher's followed students.
+3. Can list specific teacher's followed students.
 
 ### Note:
 
