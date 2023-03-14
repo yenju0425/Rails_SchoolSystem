@@ -1,6 +1,6 @@
 # README
 
-OA Interview Test Template.
+Faria OpenApply Interview Test.
 
 ## Problem
 Please read the description thoroughly then create a program to solve this problem [here](./PROBLEM.md) 
