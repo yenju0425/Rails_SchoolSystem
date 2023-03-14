@@ -10,7 +10,7 @@ please provide the following 3 APIs to implement the feature:
 
 ### Note:
 
-You can define model attributes freely, all we want is the follow/unfollow, if you can make it more like real world feature that's welcome.
+You can define model attributes freely, all we want is the follow/unfollow feature. if you can make it more like real world feature that's welcome.
 
 
 ## Requirements
