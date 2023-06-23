@@ -23,44 +23,43 @@ class TeachersController < ApplicationController
   end
 
   def follow
-    # gets the teacher id from the body, and the array of student ids from the body
-    teacher_id = params[:teacher_id]
-    student_ids = params[:student_ids]
-
-    student_ids.each do |student_id|
-      # teacher_student = TeacherStudent.new(teacher_id: teacher_id, student_id: student_id, followed: true)
-      teacher_student = TeacherStudent.find_or_initialize_by(teacher_id: teacher_id, student_id: student_id)
-      teacher_student.followed = true
-
-      if teacher_student.save
-        render json: teacher_student, status: :created
-      else
-        render json: { errors: teacher_student.errors.full_messages }, status: :unprocessable_entity
-      end
+    # check teacher
+    teacher = Teacher.find_by(id: params[:teacher_id]) # RICKNOTE find_by v.s. find
+    unless teacher
+      render json: { errors: "Teacher not found" }, status: :unprocessable_entity
+      return
     end
+
+    # follow students
+    follow_failed_ids = teacher.follow_students(params[:student_ids])
+    if follow_failed_ids.empty?
+      render json: teacher, status: :created
+    else
+      render json: { errors: "One or more students failed to follow", follow_failed_ids: follow_failed_ids }, status: :unprocessable_entity
+    end
+
+  rescue ActiveRecord::InvalidForeignKey => e
+    render json: { errors: e.message }, status: :unprocessable_entity
   end
 
   def unfollow
-    # gets the teacher id from the body, and the array of student ids from the body
-    teacher_id = params[:teacher_id]
-    student_ids = params[:student_ids]
-
-    student_ids.each do |student_id|
-      # teacher_student = TeacherStudent.new(teacher_id: teacher_id, student_id: student_id, followed: true)
-      teacher_student = TeacherStudent.find_by(teacher_id: teacher_id, student_id: student_id)
-      if teacher_student.nil?
-        render json: { errors: "The teacher is not following the student" }, status: :unprocessable_entity
-        return
-      end
-
-      teacher_student.followed = false
-
-      if teacher_student.save
-        render json: teacher_student, status: :created
-      else
-        render json: { errors: teacher_student.errors.full_messages }, status: :unprocessable_entity
-      end
+    #  check teacher
+    teacher = Teacher.find_by(id: params[:teacher_id]) # RICKNOTE find_by v.s. find
+    unless teacher
+      render json: { errors: "Teacher not found" }, status: :unprocessable_entity
+      return
     end
+
+    # unfollow students
+    unfollow_failed_ids = teacher.unfollow_students(params[:student_ids])
+    if unfollow_failed_ids.empty?
+      render json: teacher, status: :created
+    else
+      render json: { errors: "One or more students failed to unfollow", unfollow_failed_ids: unfollow_failed_ids }, status: :unprocessable_entity
+    end
+
+  rescue ActiveRecord::InvalidForeignKey => e
+    render json: { errors: e.message }, status: :unprocessable_entity
   end
 
   private
