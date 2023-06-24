@@ -1,28 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe TeacherStudent, type: :model do
-  # Test follow relationship
-  it "creates a new follow relationship" do
-    teacher = Teacher.create(name: "Teacher Rick")
-    student = Student.create(name: "Student Rick")
-    expect { TeacherStudent.create(teacher: teacher, student: student, true) }.to change { TeacherStudent.count }.by(1)
+  let(:teacher) { Teacher.create(name: "Teacher Rick") }
+  let(:student) { Student.create(name: "Student Rick") }
+
+  it "when a teacher follows a student" do
+    expect { TeacherStudent.create(teacher: teacher, student: student, followed: true) }.to change { TeacherStudent.followed.count }.by(1)
   end
 
-  it "create a new follow relationship with a not existing teacher" do
-    student = Student.create(name: "Student Rick")
-    expect { TeacherStudent.create(teacher_id: 1, student: student, true) }.to raise_error(ActiveRecord::InvalidForeignKey)
+  it "when an teacher unfollows a student" do
+    teacher_student = TeacherStudent.create(teacher: teacher, student: student, followed: true)
+    expect { TeacherStudent.find_by(teacher: teacher, student: student).update(followed: false) }.to change { TeacherStudent.not_followed.count }.by(1)
   end
 
-  it "create a new follow relationship with a not existing student" do
-    teacher = Teacher.create(name: "Teacher Rick")
-    expect { TeacherStudent.create(teacher: teacher, student_id: 1, true) }.to raise_error(ActiveRecord::InvalidForeignKey)
+  it "when a teacher refollows a unfollowed student" do
+    teacher_student = TeacherStudent.create(teacher: teacher, student: student, followed: false)
+    expect { TeacherStudent.find_by(teacher: teacher, student: student).update(followed: true) }.to change { TeacherStudent.followed.count }.by(1)
   end
-
-  # Test unfollow relationship
-  if "deletes a follow relationship" do
-    teacher = Teacher.create(name: "Teacher Rick")
-    student = Student.create(name: "Student Rick")
-    TeacherStudent.create(teacher: teacher, student: student)
-  end
-
 end

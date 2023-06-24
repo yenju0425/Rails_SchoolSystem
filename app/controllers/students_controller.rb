@@ -14,8 +14,14 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    student = Student.find(params[:id])
-    if student.destroy
+    # check student
+    student = Student.find_by(id: params[:id], deleted_at: nil)
+    unless student
+      render json: { errors: "Student not found" }, status: :unprocessable_entity
+      return
+    end
+
+    if student.soft_delete # RICKNOTE soft_delete
       render json: { message: "Student successfully deleted." }, status: :ok
     else
       render json: { errors: student.errors.full_messages }, status: :unprocessable_entity
