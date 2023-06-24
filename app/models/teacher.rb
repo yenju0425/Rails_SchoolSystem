@@ -71,6 +71,7 @@ class Teacher < ApplicationRecord
   end
 
   def get_followed_students
-    TeacherStudent.where(teacher_id: id, followed: true)
+    followed_student_ids = TeacherStudent.where(teacher_id: id, followed: true).pluck(:student_id)
+    Student.where(id: followed_student_ids)
   end
 end
