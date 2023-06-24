@@ -6,5 +6,9 @@ Rails.application.routes.draw do
       post "follow", to: "teachers#follow" # /teachers/follow
       post "unfollow", to: "teachers#unfollow" # /teachers/unfollow
     end
+
+    member do
+      get "students", to: "teachers#students" # /teachers/:id/students
+    end
   end
 end

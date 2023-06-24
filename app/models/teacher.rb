@@ -69,4 +69,8 @@ class Teacher < ApplicationRecord
     update(deleted_at: Time.now)
     TeacherStudent.where(teacher_id: id).update_all(followed: false)
   end
+
+  def get_followed_students
+    TeacherStudent.where(teacher_id: id, followed: true)
+  end
 end

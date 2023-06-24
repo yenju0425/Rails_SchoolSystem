@@ -161,4 +161,31 @@ RSpec.describe "Teachers", type: :request do
       expect(response).to have_http_status :unprocessable_entity
     end
   end
+
+  # list all students
+  describe "GET teachers/:id/students" do
+    let (:student) do
+      Student.create(name: "John Doe")
+    end
+
+    it "list a existing teacher's all followed students" do
+      id = existing_teacher.id
+      TeacherStudent.create(teacher_id: id, student_id: student.id, followed: true)
+
+      get "/teachers/#{id}/students"
+
+      response_data = JSON.parse(response.body)
+      expect(response_data.size).to eq(1)
+    end
+
+    it "list a non-existing teacher's all followed students" do
+      id = existing_teacher.id
+      existing_teacher.destroy
+
+      get "/teachers/#{id}/students"
+
+      expect(response).to have_http_status :unprocessable_entity
+    end
+
+  end
 end

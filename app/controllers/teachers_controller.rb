@@ -68,6 +68,18 @@ class TeachersController < ApplicationController
     render json: { errors: e.message }, status: :unprocessable_entity
   end
 
+  def students
+    #  check teacher
+    teacher = Teacher.find_by(id: params[:id], deleted_at: nil)
+    unless teacher
+      render json: { errors: "Teacher not found" }, status: :unprocessable_entity
+      return
+    end
+
+    students = teacher.get_followed_students
+    render json: students
+  end
+
   private
 
   def teacher_params
