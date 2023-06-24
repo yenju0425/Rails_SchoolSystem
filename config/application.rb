@@ -20,6 +20,6 @@ module OaTemplate
     # config.eager_load_paths << Rails.root.join("extras")
 
     # RICKDEBUG:
-    config.action_controller.default_protect_from_forgery = false unless ENV["RAILS_ENV"] == "production"
+    # config.action_controller.default_protect_from_forgery = false unless ENV["RAILS_ENV"] == "production"
   end
 end

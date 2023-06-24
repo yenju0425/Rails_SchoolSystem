@@ -1,23 +1,50 @@
 # README
 
-Faria OpenApply Interview Test.
+In this project, there are 7 available endpoints:
 
-## Problem
-Please read the description thoroughly then create a program to solve this problem [here](./PROBLEM.md) 
+1. **POST /students**
+   - This endpoint is used to create a new student. The request body should be in the following format:
+     ```json
+     {
+         "student": {
+             "name": "Doge"
+         }
+     }
+     ```
 
-### Note:
-*  Please use this template to reslove problem.
-*  You should include ​unit tests​ in your solution. We recommend using ​TDD​ to solve these problems.
-* Keep your methods short.
-* Submit ​production-ready code​ that is clean and easy to understand.
+2. **DELETE /students/:id**
+   - This endpoint is used to delete a student by ID.
 
+3. **POST /teachers**
+   - This endpoint is used to create a new teacher. The request body should be in the following format:
+     ```json
+     {
+         "teacher": {
+             "name": "Doge"
+         }
+     }
+     ```
 
-## Rules
+4. **DELETE /teachers/:id**
+   - This endpoint is used to delete a teacher by ID.
 
-1. We want our hiring process to be fair, and for everyone to start from the same place. To enable this, we request that you do not share or publish these problems.
-2. Please submit your solution to your own Github account for review
+5. **POST /teachers/follow**
+   - This endpoint is used to let a teacher follow a list of students. The request body should be in the following format:
+     ```json
+     {
+         "teacher_id": 1,
+         "student_ids": [1, 2]
+     }
+     ```
 
+6. **POST /teachers/unfollow**
+   - This endpoint is used to let a teacher unfollow a list of students. The request body should be in the following format:
+     ```json
+     {
+         "teacher_id": 1,
+         "student_ids": [1, 2]
+     }
+     ```
 
-As a general rule, we allow three days from the date that you receive these instructions to submit your code, but you may request more time from me if needed. If you have any questions about the code as it relates to your ​interview​ process, please contact our HR.
-
-
+7. **GET /teachers/:id/students**
+   - This endpoint is used to get a list of students followed by a teacher.

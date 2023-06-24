@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Students", type: :request do
-  let (:student_params) do { student: { name: "John Doe" } } end # RICKASKS: Why so many curly braces?
+  let (:student_params) do { student: { name: "John Doe" } } end
   let (:existing_student) do 
     Student.create(name: "John Doe")
   end
