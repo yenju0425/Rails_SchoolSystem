@@ -1,5 +1,13 @@
 # README
 
+In this project, you will learn about:
+
+1. Creating API endpoints for external access to the database via the HTTP protocol.
+2. Familiarizing yourself with Rails' MVC architecture.
+3. Practicing unit testing using RSpec.
+
+This project is a simulated school system where you can add and delete students and teachers through the API. Additionally, teachers can track students' progress. For detailed API documentation, please refer to the section below.
+
 In this project, there are 7 available endpoints:
 
 1. **POST /students**
